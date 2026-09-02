@@ -171,11 +171,6 @@ function DataGlobe(){
       {name:'NEW YORK',lat:40.7128,lon:-74.006,label:true},
       {name:'KOSOVO',lat:42.6629,lon:21.1655,label:true},
       {name:'SAN FRANCISCO',lat:37.7749,lon:-122.4194,label:true},
-      {name:'SEATTLE',lat:47.6062,lon:-122.3321,label:false},
-      {name:'LOS ANGELES',lat:34.0522,lon:-118.2437,label:false},
-      {name:'DENVER',lat:39.7392,lon:-104.9903,label:false},
-      {name:'DALLAS',lat:32.7767,lon:-96.797,label:false},
-      {name:'MIAMI',lat:25.7617,lon:-80.1918,label:false},
     ];
     const addDot=(lat:number,lon:number,radius:number,opacity:number,size:number,scatter=false)=>{const la=lat*Math.PI/180,lo=lon*Math.PI/180,c=Math.cos(la);dots.push({x:c*Math.cos(lo)*radius,y:Math.sin(la)*radius,z:c*Math.sin(lo)*radius,opacity,size,scatter})};
     const mobile=canvas.clientWidth<560,landTarget=mobile?7800:15000,oceanTarget=mobile?2600:4800,scatterTarget=mobile?700:1500;
@@ -215,7 +210,7 @@ function DataGlobe(){
     const ro=new ResizeObserver(resize);ro.observe(canvas);canvas.addEventListener('pointermove',onMove);canvas.addEventListener('pointerdown',onDown);canvas.addEventListener('pointerup',onUp);canvas.addEventListener('pointercancel',onUp);canvas.addEventListener('pointerleave',onLeave);canvas.addEventListener('keydown',onKey);resize();raf=requestAnimationFrame(draw);
     return()=>{ro.disconnect();cancelAnimationFrame(raf);canvas.removeEventListener('pointermove',onMove);canvas.removeEventListener('pointerdown',onDown);canvas.removeEventListener('pointerup',onUp);canvas.removeEventListener('pointercancel',onUp);canvas.removeEventListener('pointerleave',onLeave);canvas.removeEventListener('keydown',onKey)};
   },[]);
-  return <canvas ref={ref} className="data-globe" role="img" aria-label="Interactive rotating point-cloud globe highlighting Kosovo, New York, San Francisco, and five additional U.S. hubs. Drag to rotate or use arrow keys." tabIndex={0}/>;
+  return <canvas ref={ref} className="data-globe" role="img" aria-label="Interactive rotating point-cloud globe highlighting Kosovo, New York, and San Francisco. Drag to rotate or use arrow keys." tabIndex={0}/>;
 }
 
 function Counter({target,prefix='',suffix=''}:{target:number,prefix?:string,suffix?:string}){
