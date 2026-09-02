@@ -445,7 +445,7 @@ export default function Home(){
     </div></section>
 
     <section className="careers" id="careers"><div className="content careers-shell">
-      <div className="careers-intro" data-reveal><div><span>// CAREERS NETWORK — 03 OPEN</span><h2>Put your expertise to work.</h2></div><p>Healthcare needs capable, reliable products—and the people who know how to build them.</p></div>
+      <div className="careers-intro" data-reveal><div><span>// CAREERS NETWORK — 03 OPEN</span><h2>Come build healthcare with us.</h2></div><p>Healthcare needs capable, reliable products—and the people who know how to build them.</p></div>
       <div className="careers-grid">{jobs.map((job,index)=><JobCard job={job} index={index} key={job.title}/>)}</div>
     </div></section>
 
