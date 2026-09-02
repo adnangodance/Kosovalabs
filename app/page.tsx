@@ -431,12 +431,6 @@ export default function Home(){
     <section className="platform platform-suite" id="platform"><div className="content platform-suite-shell">
       <div className="platform-heading platform-suite-heading" data-reveal><div><span>// PLATFORM NETWORK — 04 CORE</span><h2><b>Kosova Labs</b> is the platform for<br/>healthcare products at scale.</h2></div><a className="ghost-button" href="mailto:hello@kosovalabs.com"><AuiButtonText>Start building</AuiButtonText></a></div>
       <div className="platform-capability-grid">{platformCapabilities.map((item,index)=><PlatformCapabilityCard item={item} index={index} key={item.kicker}/>)}</div>
-      <div className="solution-links" id="solutions" hidden>{solutions.map(item=><SolutionCard item={item} key={item.icon}/>)}</div>
-    </div></section>
-
-    <section className="updates" id="updates"><div className="content updates-shell">
-      <div className="updates-head" data-reveal><i aria-hidden="true"/><div><span>// FIELD NOTES — 03 LATEST</span><h2>Latest updates</h2></div><a className="white-button" href="#releases"><AuiButtonText>All updates</AuiButtonText></a></div>
-      <div className="updates-grid">{updates.map((item,index)=><UpdateCard item={item} index={index} key={item.title}/>)}</div>
     </div></section>
 
     <section className="team" id="team"><div className="content team-shell">
@@ -447,6 +441,11 @@ export default function Home(){
     <section className="careers" id="careers"><div className="content careers-shell">
       <div className="careers-intro" data-reveal><div><span>// CAREERS NETWORK — 03 OPEN</span><h2>Come build healthcare with us.</h2></div><p>Healthcare needs capable, reliable products—and the people who know how to build them.</p></div>
       <div className="careers-grid">{jobs.map((job,index)=><JobCard job={job} index={index} key={job.title}/>)}</div>
+    </div></section>
+
+    <section className="updates" id="updates"><div className="content updates-shell">
+      <div className="updates-head" data-reveal><i aria-hidden="true"/><div><span>// FIELD NOTES — 03 LATEST</span><h2>Latest updates</h2></div><a className="white-button" href="#releases"><AuiButtonText>All updates</AuiButtonText></a></div>
+      <div className="updates-grid">{updates.map((item,index)=><UpdateCard item={item} index={index} key={item.title}/>)}</div>
     </div></section>
 
     <section className="closing-cta"><div className="content closing-cta-frame" onPointerMove={trackCtaGlow}><b className="closing-cta-glow" aria-hidden="true"/><b className="closing-cta-wash" aria-hidden="true"/><i className="frame-cross cross-a" aria-hidden="true"/><i className="frame-cross cross-b" aria-hidden="true"/><div className="closing-cta-inner" data-reveal><h2>Healthcare products,<br/>built to move.</h2><div className="closing-cta-actions"><a className="white-button" href="mailto:hello@kosovalabs.com"><AuiButtonText>Start a project</AuiButtonText></a><a className="ghost-button" href="#careers"><AuiButtonText>Join our team</AuiButtonText></a></div></div></div></section>
