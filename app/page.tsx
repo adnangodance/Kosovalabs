@@ -3,6 +3,7 @@
 import {useEffect,useRef,useState,type CSSProperties,type PointerEvent as ReactPointerEvent,type ReactNode} from 'react';
 
 type PixelMode='hero'|'metrics'|'cta';
+const publicAsset=(path:string)=>`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/${path}`;
 
 function PixelCanvas({mode}:{mode:PixelMode}){
   const ref=useRef<HTMLCanvasElement>(null);
@@ -273,15 +274,15 @@ const jobs:Job[]=[
 type TeamMember={initials:string;name:string;role:string;image?:string};
 
 const teamMembers:TeamMember[]=[
-  {initials:'ZR',name:'Zee R.',role:'CEO',image:'/kosovalabs/team-zee.png'},
+  {initials:'ZR',name:'Zee R.',role:'CEO',image:publicAsset('team-zee.png')},
   {initials:'AS',name:'Altin S.',role:'Frontend'},
-  {initials:'SB',name:'Shpend B.',role:'Backend',image:'/kosovalabs/team-shpend.png'},
-  {initials:'AG',name:'Adnan G.',role:'Design',image:'/kosovalabs/team-adnan.png'},
+  {initials:'SB',name:'Shpend B.',role:'Backend',image:publicAsset('team-shpend.png')},
+  {initials:'AG',name:'Adnan G.',role:'Design',image:publicAsset('team-adnan.png')},
   {initials:'WS',name:'Will S.',role:'Sales Lead'},
   {initials:'BR',name:'Blinera R.',role:'Customer Service Rep'},
   {initials:'SC',name:'Shayne C.',role:'Customer Service Rep'},
   {initials:'CK',name:'Chirag K.',role:'Flutter Developer'},
-  {initials:'EO',name:'Edrin O.',role:'Team',image:'/kosovalabs/team-edrin.png'},
+  {initials:'EO',name:'Edrin O.',role:'Team',image:publicAsset('team-edrin.png')},
 ];
 
 function TeamCard({member,index}:{member:TeamMember;index:number}){
@@ -334,8 +335,8 @@ const releases:Release[]=[
   {kind:'rings',title:'BatchRX',copy:'Where pharmacies turn for trusted audit support.',statA:'LIVE',labelA:'Product status',statB:'AUDIT',labelB:'Workflow focus',href:'https://batchrx.com'},
 ];
 function ProjectVisual({release}:{release:Release}){
-  if(release.kind==='grid')return <img className="project-preview-image" src="/kosovalabs/scriptlink-showcase.png" alt="ScriptLinkRX healthcare platform, patient workflow, network metrics, and medicine catalogue"/>;
-  if(release.kind==='rings')return <img className="project-preview-batch-ui" src="/kosovalabs/batchrx-release.png" alt="BatchRX pharmacy inventory report and audit workflow"/>;
+  if(release.kind==='grid')return <img className="project-preview-image" src={publicAsset('scriptlink-showcase.png')} alt="ScriptLinkRX healthcare platform, patient workflow, network metrics, and medicine catalogue"/>;
+  if(release.kind==='rings')return <img className="project-preview-batch-ui" src={publicAsset('batchrx-release.png')} alt="BatchRX pharmacy inventory report and audit workflow"/>;
   if(release.kind==='chart')return <div className="project-preview-system" aria-hidden="true"><span/><span/><span/><span/><b>AI / PRODUCT VELOCITY</b></div>;
   return <div className="project-preview-route" aria-hidden="true"><span>NEW YORK</span><i>↔</i><span>PRISHTINA</span><small>ONE CONNECTED PRODUCT TEAM</small></div>;
 }
@@ -374,9 +375,9 @@ function PlatformCapabilityCard({item,index}:{item:PlatformCapability;index:numb
 
 type UpdateItem={category:string;date:string;dateTime:string;title:string;copy:string;image:string;href:string;visualLabel?:string;visualTitle?:string;visualMode?:'score'};
 const updates:UpdateItem[]=[
-  {category:'Product network',date:'Sep 2, 2026',dateTime:'2026-09-02',title:'Inside the nationwide care network behind ScriptLinkRX',copy:'How one connected platform helps pharmacy teams move from order to patient with clarity.',image:'/kosovalabs/update-scriptlinkrx.png',href:'https://scriptlinkrx.com'},
-  {category:'Coverage',date:'Aug 28, 2026',dateTime:'2026-08-28',title:'How ScriptLinkRX covered 50+ states',copy:'The connected infrastructure behind a nationwide compounding network built for exceptional patient care.',image:'/kosovalabs/update-scriptlinkrx-coverage.png',href:'https://scriptlinkrx.com',visualLabel:'SCRIPTLINKRX',visualTitle:'How we covered 50+ states.'},
-  {category:'Operations',date:'Aug 21, 2026',dateTime:'2026-08-21',title:'BatchRX brings clarity to modern pharmacy audit workflows',copy:'A closer look at the systems making inventory intelligence easier to trust and act on.',image:'/kosovalabs/update-batchrx.png',href:'https://batchrx.com',visualMode:'score'},
+  {category:'Product network',date:'Sep 2, 2026',dateTime:'2026-09-02',title:'Inside the nationwide care network behind ScriptLinkRX',copy:'How one connected platform helps pharmacy teams move from order to patient with clarity.',image:publicAsset('update-scriptlinkrx.png'),href:'https://scriptlinkrx.com'},
+  {category:'Coverage',date:'Aug 28, 2026',dateTime:'2026-08-28',title:'How ScriptLinkRX covered 50+ states',copy:'The connected infrastructure behind a nationwide compounding network built for exceptional patient care.',image:publicAsset('update-scriptlinkrx-coverage.png'),href:'https://scriptlinkrx.com',visualLabel:'SCRIPTLINKRX',visualTitle:'How we covered 50+ states.'},
+  {category:'Operations',date:'Aug 21, 2026',dateTime:'2026-08-21',title:'BatchRX brings clarity to modern pharmacy audit workflows',copy:'A closer look at the systems making inventory intelligence easier to trust and act on.',image:publicAsset('update-batchrx.png'),href:'https://batchrx.com',visualMode:'score'},
 ];
 
 function BatchScoreArt(){
@@ -414,7 +415,7 @@ export default function Home(){
       </filter>
     </svg>
     {banner&&<div className="announcement"><span>Kosova Labs Studio is accepting new healthcare platform builds.</span><a href="mailto:hello@kosovalabs.com">Start a conversation <Arrow/></a><button onClick={()=>setBanner(false)} aria-label="Dismiss banner">×</button></div>}
-    <header className="nav-shell"><div className="content nav-row"><a className="base-mark" href="#top" aria-label="Kosova Labs home"><img src="/kosovalabs/kosova-labs-mark.png" alt=""/><span className="brand-reveal" aria-hidden="true"><AuiButtonText>Kosova Labs</AuiButtonText></span></a><nav className="nav-links" aria-label="Main navigation">
+    <header className="nav-shell"><div className="content nav-row"><a className="base-mark" href="#top" aria-label="Kosova Labs home"><img src={publicAsset('kosova-labs-mark.png')} alt=""/><span className="brand-reveal" aria-hidden="true"><AuiButtonText>Kosova Labs</AuiButtonText></span></a><nav className="nav-links" aria-label="Main navigation">
       <div className="nav-item"><button>Solutions <span>⌄</span></button><div className="mega"><b>What we build</b><a href="#solutions">Product engineering <Arrow/></a><a href="#solutions">Platform systems <Arrow/></a><a href="#solutions">AI operations <Arrow/></a></div></div>
       <div className="nav-item"><button>Products <span>⌄</span></button><div className="mega"><b>Our products</b><a href="#products">ScriptLinkRX <Arrow/></a><a href="#products">BatchRX <Arrow/></a></div></div>
       <div className="nav-item"><button>Company <span>⌄</span></button><div className="mega"><b>Kosova Labs</b><a href="#platform">Approach <Arrow/></a><a href="#team">Team <Arrow/></a><a href="#footer">New York ↔ Prishtina <Arrow/></a></div></div>
@@ -456,7 +457,7 @@ export default function Home(){
 
     <footer className="site-footer" id="footer">
       <div className="content footer-main">
-        <div className="footer-brand-column"><a className="footer-wordmark" href="#top"><img src="/kosovalabs/kosova-labs-mark.png" alt=""/>Kosova Labs</a><p>Technology that moves healthcare forward—from New York to Prishtina.</p></div>
+        <div className="footer-brand-column"><a className="footer-wordmark" href="#top"><img src={publicAsset('kosova-labs-mark.png')} alt=""/>Kosova Labs</a><p>Technology that moves healthcare forward—from New York to Prishtina.</p></div>
         <nav className="footer-links" aria-label="Footer navigation">
           <div><b>Explore</b><a href="#solutions">Solutions</a><a href="#products">Products</a><a href="#ai-engineering">AI engineering</a><a href="#releases">Latest work</a></div>
           <div><b>Capabilities</b><a href="#solutions">Product engineering</a><a href="#solutions">Platform systems</a><a href="#solutions">AI operations</a><a href="#solutions">Data &amp; integrations</a></div>
