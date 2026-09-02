@@ -237,14 +237,6 @@ footer{background:#090a0c}.footer-grid a{color:#9497a1}.footer-grid p{color:#7d8
 header .base-mark{background:transparent;box-shadow:0 0 24px #1d57d53d;border-radius:4px}
 header .base-mark:before,header .base-mark:after{display:none}
 header .base-mark>img{width:100%;height:100%;display:block;object-fit:cover;border-radius:4px}
-header .brand-reveal{position:absolute;left:45px;top:50%;display:flex;align-items:center;gap:9px;white-space:nowrap;overflow:hidden;clip-path:inset(0 100% 0 0);opacity:0;transform:translate(-10px,-50%);font-family:BaseMono,monospace;font-size:16px;font-weight:500;line-height:1;letter-spacing:.025em;color:#f4f6f3;text-shadow:0 0 16px #18e29938;pointer-events:none;transition:clip-path .55s var(--ease),opacity .25s,transform .55s var(--ease)}
-header .brand-reveal:before{content:'';width:6px;height:6px;flex:0 0 6px;background:#18e299;box-shadow:0 0 12px #18e299;transform:scale(.4) rotate(45deg);transition:transform .45s var(--ease) .12s}
-header .brand-reveal:after{content:'';position:absolute;left:15px;right:0;bottom:0;height:1px;background:linear-gradient(90deg,#18e299,transparent);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease) .08s}
-header .base-mark:hover .brand-reveal,header .base-mark:focus-visible .brand-reveal{clip-path:inset(0);opacity:1;transform:translate(0,-50%)}
-header .base-mark:hover .brand-reveal:before,header .base-mark:focus-visible .brand-reveal:before{transform:scale(1) rotate(45deg)}
-header .base-mark:hover .brand-reveal:after,header .base-mark:focus-visible .brand-reveal:after{transform:scaleX(1)}
-header .base-mark:hover .brand-reveal .aui-label-row:not(.aui-label-row-copy) .aui-label-char,header .base-mark:focus-visible .brand-reveal .aui-label-row:not(.aui-label-row-copy) .aui-label-char{opacity:0;transform:translateX(10px);transition-delay:var(--char-delay),var(--char-delay)}
-header .base-mark:hover .brand-reveal .aui-label-row-copy .aui-label-char,header .base-mark:focus-visible .brand-reveal .aui-label-row-copy .aui-label-char{opacity:1;transform:translateX(0);transition-delay:var(--char-follow-delay),var(--char-follow-delay)}
 .blue-button,.white-button,.soft-button{--button-bg:#3047ff;--button-fg:#f7f8ff;--button-border:#8290ff55;--button-hover-bg:#f1f0e0;--button-hover-fg:#121212;--button-hover-border:#f1f0e033}
 .blue-button.nav-cta{--button-bg:#18e299;--button-fg:#06100c;--button-border:#18e299;--button-hover-bg:#15ca89;--button-hover-fg:#04100b;--button-hover-border:#55efb7}
 .blue-button,.ghost-button,.white-button,.soft-button{font-family:BaseMono,monospace;letter-spacing:-.025em}

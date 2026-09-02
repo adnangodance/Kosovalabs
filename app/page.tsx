@@ -270,13 +270,14 @@ type TeamMember={initials:string;name:string;role:string;image?:string};
 
 const teamMembers:TeamMember[]=[
   {initials:'ZR',name:'Zee R.',role:'CEO',image:publicAsset('team-zee.png')},
-  {initials:'AS',name:'Altin S.',role:'Frontend'},
+  {initials:'AS',name:'Altin S.',role:'Frontend',image:publicAsset('team-altin.png')},
   {initials:'SB',name:'Shpend B.',role:'Backend',image:publicAsset('team-shpend.png')},
   {initials:'AG',name:'Adnan G.',role:'Design',image:publicAsset('team-adnan.png')},
   {initials:'WS',name:'Will S.',role:'Sales Lead'},
-  {initials:'BR',name:'Blinera R.',role:'Customer Service Rep'},
+  {initials:'FH',name:'Fitim H.',role:'Team',image:publicAsset('team-fitim.png')},
+  {initials:'BR',name:'Blinera R.',role:'Customer Service Rep',image:publicAsset('team-blinera.png')},
   {initials:'SC',name:'Shayne C.',role:'Customer Service Rep'},
-  {initials:'CK',name:'Chirag K.',role:'Flutter Developer'},
+  {initials:'CK',name:'Chirag K.',role:'Flutter Developer',image:publicAsset('team-chirag.png')},
   {initials:'EO',name:'Edrin O.',role:'Team',image:publicAsset('team-edrin.png')},
 ];
 
@@ -411,7 +412,7 @@ export default function Home(){
       </filter>
     </svg>
     {banner&&<div className="announcement"><span>Kosova Labs Studio is accepting new healthcare platform builds.</span><a href="mailto:hello@kosovalabs.com">Start a conversation <Arrow/></a><button onClick={()=>setBanner(false)} aria-label="Dismiss banner">×</button></div>}
-    <header className="nav-shell"><div className="content nav-row"><a className="base-mark" href="#top" aria-label="Kosova Labs home"><img src={publicAsset('kosova-labs-mark.png')} alt=""/><span className="brand-reveal" aria-hidden="true"><AuiButtonText>Kosova Labs</AuiButtonText></span></a><nav className="nav-links" aria-label="Main navigation">
+    <header className="nav-shell"><div className="content nav-row"><a className="base-mark" href="#top" aria-label="Kosova Labs home"><img src={publicAsset('kosova-labs-mark.png')} alt=""/></a><nav className="nav-links" aria-label="Main navigation">
       <div className="nav-item"><button>Solutions <span>⌄</span></button><div className="mega"><b>What we build</b><a href="#solutions">Product engineering <Arrow/></a><a href="#solutions">Platform systems <Arrow/></a><a href="#solutions">AI operations <Arrow/></a></div></div>
       <div className="nav-item"><button>Products <span>⌄</span></button><div className="mega"><b>Our products</b><a href="#products">ScriptLinkRX <Arrow/></a><a href="#products">BatchRX <Arrow/></a></div></div>
       <div className="nav-item"><button>Company <span>⌄</span></button><div className="mega"><b>Kosova Labs</b><a href="#platform">Approach <Arrow/></a><a href="#team">Team <Arrow/></a><a href="#footer">New York ↔ Prishtina <Arrow/></a></div></div>
@@ -434,7 +435,7 @@ export default function Home(){
     </div></section>
 
     <section className="team" id="team"><div className="content team-shell">
-      <header className="team-head" data-reveal><div><span>// PEOPLE NETWORK — 09 CONNECTED</span><h2>The team.</h2><p>Real people, deep expertise. New York ambition and Prishtina engineering excellence, working as one.</p></div><div className="team-locations"><span><i/>Prishtina Hub</span><span><i/>NYC HQ</span></div></header>
+      <header className="team-head" data-reveal><div><span>// PEOPLE NETWORK — 10 CONNECTED</span><h2>The team.</h2><p>Real people, deep expertise. New York ambition and Prishtina engineering excellence, working as one.</p></div><div className="team-locations"><span><i/>Prishtina Hub</span><span><i/>NYC HQ</span></div></header>
       <div className="team-grid">{teamMembers.map((member,index)=><TeamCard member={member} index={index} key={`${member.name}-${member.role}`}/>)}</div>
     </div></section>
 
