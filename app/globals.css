@@ -252,16 +252,15 @@ header .base-mark:hover .brand-reveal .aui-label-row-copy .aui-label-char,header
 .white-button .tiny-square{background:#fff}
 
 /* One cursor-following hover system shared by metrics and capability cards. */
-.metric-card,.solution-links>a{--hover-x:50%;--hover-y:50%;overflow:hidden;isolation:isolate}
+.metric-card,.solution-links>a{--hover-x:50%;--hover-y:50%;overflow:hidden;isolation:isolate}.metric-card{--metric-x:0px;--metric-y:0px}
 .metric-card-glow,.solution-card-glow{position:absolute;z-index:0;inset:-38%;opacity:0;pointer-events:none;background:radial-gradient(circle at var(--hover-x) var(--hover-y),#74f0c2c7 0,#18e29980 17%,transparent 43%),radial-gradient(circle at calc(var(--hover-x) - 27%) calc(var(--hover-y) + 35%),#f5bcd066 0,transparent 35%),radial-gradient(circle at calc(var(--hover-x) + 26%) calc(var(--hover-y) - 24%),#77ead84a 0,transparent 33%),conic-gradient(from 110deg at 50% 50%,#18e2991e,#ff9ac32a,#77ead81d,#18e2991e);filter:blur(6px) saturate(1.16);transform:scale(.88);transition:opacity .48s cubic-bezier(.4,0,.2,1),transform .8s var(--ease)}
 .metric-card-wash,.solution-card-wash{position:absolute;z-index:1;inset:0;opacity:0;pointer-events:none;background:rgba(14,15,18,.48);transition:opacity .32s cubic-bezier(.4,0,.2,1) .08s}
 .metric-card>em,.metric-card>strong,.metric-card>.metric-card-label{z-index:2}.metric-card>strong{position:relative}
 .metric-card .metric-card-glow{transform:none;transition:opacity .48s cubic-bezier(.4,0,.2,1)}
 .metric-grid .metric-card:hover{border-color:#101116;background:linear-gradient(180deg,#24262b 0%,#181a1e 47%,#0e0f12 100%);box-shadow:inset 0 1px 0 #ffffff13,0 16px 55px #0007;transform:none}
 .metric-card:hover .metric-card-glow{opacity:.82;transform:none}.metric-card:hover .metric-card-wash{opacity:1}
-.metric-card>strong{transform-origin:center center;will-change:transform,opacity;backface-visibility:hidden;transform-style:preserve-3d;transition:text-shadow .32s cubic-bezier(.4,0,.2,1)}
-.metric-card:hover>strong{color:#f5f6fa;text-shadow:0 0 17px #ffffff38;animation:metric-number-flip .7s cubic-bezier(.2,.72,.22,1) both}
-@keyframes metric-number-flip{0%{transform:perspective(280px) rotateX(0) translateY(0);opacity:1}36%{transform:perspective(280px) rotateX(82deg) translateY(-2px);opacity:.32}37%{transform:perspective(280px) rotateX(-82deg) translateY(2px);opacity:.32}72%{transform:perspective(280px) rotateX(8deg) translateY(-1px);opacity:1}100%{transform:perspective(280px) rotateX(0) translateY(0);opacity:1}}
+.metric-card>strong{transform-origin:left center;will-change:transform;transition:transform .22s cubic-bezier(.2,.75,.25,1),text-shadow .32s cubic-bezier(.4,0,.2,1)}
+.metric-card:hover>strong{color:#f5f6fa;text-shadow:0 0 17px #ffffff38;transform:translate3d(var(--metric-x),var(--metric-y),0) scale(1.035)}
 
 /* Cursor-following glow for the capability cards. */
 .solution-links>a>.line-icon,.solution-links>a>span{z-index:2}

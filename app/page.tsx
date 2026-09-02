@@ -306,8 +306,9 @@ function JobCard({job,index}:{job:Job;index:number}){
 }
 
 function MetricCard({index,label,children}:{index:number;label:string;children:ReactNode}){
-  const trackGlow=(event:ReactPointerEvent<HTMLElement>)=>{const rect=event.currentTarget.getBoundingClientRect();event.currentTarget.style.setProperty('--hover-x',`${((event.clientX-rect.left)/rect.width)*100}%`);event.currentTarget.style.setProperty('--hover-y',`${((event.clientY-rect.top)/rect.height)*100}%`)};
-  return <article className="metric-card" onPointerMove={trackGlow}>
+  const trackGlow=(event:ReactPointerEvent<HTMLElement>)=>{const rect=event.currentTarget.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width,y=(event.clientY-rect.top)/rect.height;event.currentTarget.style.setProperty('--hover-x',`${x*100}%`);event.currentTarget.style.setProperty('--hover-y',`${y*100}%`);event.currentTarget.style.setProperty('--metric-x',`${(x-.5)*10}px`);event.currentTarget.style.setProperty('--metric-y',`${(y-.5)*7}px`)};
+  const resetNumber=(event:ReactPointerEvent<HTMLElement>)=>{event.currentTarget.style.setProperty('--metric-x','0px');event.currentTarget.style.setProperty('--metric-y','0px')};
+  return <article className="metric-card" onPointerMove={trackGlow} onPointerLeave={resetNumber}>
     <span className="metric-card-glow" aria-hidden="true"/><span className="metric-card-wash" aria-hidden="true"/>
     <em aria-hidden="true">0{index}</em><strong>{children}</strong><span className="metric-card-label">{label}</span>
   </article>;
