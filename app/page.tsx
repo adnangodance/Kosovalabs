@@ -166,7 +166,16 @@ function DataGlobe(){
     const random=()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
     type Dot={x:number,y:number,z:number,opacity:number,size:number,scatter:boolean};
     const dots:Dot[]=[];
-    const locations=[{name:'NEW YORK',lat:40.7128,lon:-74.006},{name:'KOSOVO',lat:42.6629,lon:21.1655}];
+    const locations=[
+      {name:'NEW YORK',lat:40.7128,lon:-74.006,label:true},
+      {name:'KOSOVO',lat:42.6629,lon:21.1655,label:true},
+      {name:'SAN FRANCISCO',lat:37.7749,lon:-122.4194,label:true},
+      {name:'SEATTLE',lat:47.6062,lon:-122.3321,label:false},
+      {name:'LOS ANGELES',lat:34.0522,lon:-118.2437,label:false},
+      {name:'DENVER',lat:39.7392,lon:-104.9903,label:false},
+      {name:'DALLAS',lat:32.7767,lon:-96.797,label:false},
+      {name:'MIAMI',lat:25.7617,lon:-80.1918,label:false},
+    ];
     const addDot=(lat:number,lon:number,radius:number,opacity:number,size:number,scatter=false)=>{const la=lat*Math.PI/180,lo=lon*Math.PI/180,c=Math.cos(la);dots.push({x:c*Math.cos(lo)*radius,y:Math.sin(la)*radius,z:c*Math.sin(lo)*radius,opacity,size,scatter})};
     const mobile=canvas.clientWidth<560,landTarget=mobile?7800:15000,oceanTarget=mobile?2600:4800,scatterTarget=mobile?700:1500;
     let land=0,attempts=0;
@@ -193,8 +202,8 @@ function DataGlobe(){
         const depth=front?.48+p[2]*.52:.11;ctx.globalAlpha=d.opacity*depth;ctx.fillStyle=d.scatter?'#cbd0dc':'#ffffff';const size=d.size*(front?1.08:.72)*Math.max(.75,perspective);ctx.fillRect(x-size/2,y-size/2,size,size)}
       ctx.globalAlpha=1;
       const markerPoints=locations.map(place=>{const la=place.lat*Math.PI/180,lo=place.lon*Math.PI/180,c=Math.cos(la),p=rotate(c*Math.cos(lo)*1.015,Math.sin(la)*1.015,c*Math.sin(lo)*1.015),perspective=1/(1.12-p[2]*.12);return{...place,x:cx+p[0]*radius*perspective,y:cy-p[1]*radius*perspective,z:p[2]}});
-      if(markerPoints.every(p=>p.z>-.03)){ctx.save();ctx.globalAlpha=.35;ctx.strokeStyle='#18e299';ctx.lineWidth=.7;ctx.setLineDash([2,5]);ctx.beginPath();ctx.moveTo(markerPoints[0].x,markerPoints[0].y);ctx.quadraticCurveTo(cx,cy-radius*.88,markerPoints[1].x,markerPoints[1].y);ctx.stroke();ctx.restore()}
-      markerPoints.forEach((place,index)=>{if(place.z<-.08)return;const fade=Math.min(1,(place.z+.08)/.3),pulse=.5+.5*Math.sin(now*.005+index*Math.PI);ctx.save();ctx.globalAlpha=fade;const halo=ctx.createRadialGradient(place.x,place.y,0,place.x,place.y,18+pulse*6);halo.addColorStop(0,'rgba(24,226,153,.42)');halo.addColorStop(.28,'rgba(24,226,153,.14)');halo.addColorStop(1,'rgba(24,226,153,0)');ctx.fillStyle=halo;ctx.beginPath();ctx.arc(place.x,place.y,24,0,Math.PI*2);ctx.fill();ctx.strokeStyle=`rgba(24,226,153,${.55+pulse*.35})`;ctx.lineWidth=1;ctx.beginPath();ctx.arc(place.x,place.y,7+pulse*5,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#18e299';ctx.beginPath();ctx.arc(place.x,place.y,2.5,0,Math.PI*2);ctx.fill();const right=place.x>=cx,tx=place.x+(right?16:-16);ctx.strokeStyle='rgba(24,226,153,.75)';ctx.beginPath();ctx.moveTo(place.x+(right?7:-7),place.y);ctx.lineTo(place.x+(right?12:-12),place.y);ctx.stroke();ctx.font='8px BaseMono, monospace';ctx.letterSpacing='1px';ctx.textAlign=right?'left':'right';ctx.textBaseline='middle';ctx.fillStyle='#f7f8ff';ctx.fillText(place.name,tx,place.y+.5);ctx.restore()});
+      const primaryPoints=markerPoints.slice(0,2);if(primaryPoints.every(p=>p.z>-.03)){ctx.save();ctx.globalAlpha=.35;ctx.strokeStyle='#18e299';ctx.lineWidth=.7;ctx.setLineDash([2,5]);ctx.beginPath();ctx.moveTo(primaryPoints[0].x,primaryPoints[0].y);ctx.quadraticCurveTo(cx,cy-radius*.88,primaryPoints[1].x,primaryPoints[1].y);ctx.stroke();ctx.restore()}
+      markerPoints.forEach((place,index)=>{if(place.z<-.08)return;const fade=Math.min(1,(place.z+.08)/.3),pulse=.5+.5*Math.sin(now*.005+index*Math.PI),labelled=place.label;ctx.save();ctx.globalAlpha=fade;const halo=ctx.createRadialGradient(place.x,place.y,0,place.x,place.y,18+pulse*7);halo.addColorStop(0,'rgba(24,226,153,.55)');halo.addColorStop(.28,'rgba(24,226,153,.19)');halo.addColorStop(1,'rgba(24,226,153,0)');ctx.fillStyle=halo;ctx.beginPath();ctx.arc(place.x,place.y,25,0,Math.PI*2);ctx.fill();ctx.strokeStyle=`rgba(24,226,153,${.62+pulse*.36})`;ctx.lineWidth=1;ctx.beginPath();ctx.arc(place.x,place.y,7+pulse*5,0,Math.PI*2);ctx.stroke();ctx.fillStyle=labelled?'#d5ffef':'#18e299';ctx.beginPath();ctx.arc(place.x,place.y,labelled?2.9:2.7,0,Math.PI*2);ctx.fill();if(labelled){const right=place.x>=cx,tx=place.x+(right?16:-16);ctx.strokeStyle='rgba(24,226,153,.75)';ctx.beginPath();ctx.moveTo(place.x+(right?7:-7),place.y);ctx.lineTo(place.x+(right?12:-12),place.y);ctx.stroke();ctx.font='8px BaseMono, monospace';ctx.letterSpacing='1px';ctx.textAlign=right?'left':'right';ctx.textBaseline='middle';ctx.fillStyle='#f7f8ff';ctx.fillText(place.name,tx,place.y+.5)}ctx.restore()});
       const glow=ctx.createRadialGradient(cx,cy,radius*.68,cx,cy,radius*1.32);glow.addColorStop(0,'rgba(48,71,255,0)');glow.addColorStop(.72,'rgba(48,71,255,.018)');glow.addColorStop(1,'rgba(48,71,255,0)');ctx.fillStyle=glow;ctx.fillRect(cx-radius*1.35,cy-radius*1.35,radius*2.7,radius*2.7);frame++};
     const point=(e:PointerEvent)=>{const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
     const onMove=(e:PointerEvent)=>{const p=point(e);pointer.x=p.x;pointer.y=p.y;pointer.active=true;if(dragging){const dx=e.clientX-lastX,dy=e.clientY-lastY;yaw+=dx*.005;pitch=Math.max(-1.05,Math.min(1.05,pitch+dy*.005));yawVelocity=dx*.0008;pitchVelocity=dy*.00035;lastX=e.clientX;lastY=e.clientY}};
@@ -205,7 +214,7 @@ function DataGlobe(){
     const ro=new ResizeObserver(resize);ro.observe(canvas);canvas.addEventListener('pointermove',onMove);canvas.addEventListener('pointerdown',onDown);canvas.addEventListener('pointerup',onUp);canvas.addEventListener('pointercancel',onUp);canvas.addEventListener('pointerleave',onLeave);canvas.addEventListener('keydown',onKey);resize();raf=requestAnimationFrame(draw);
     return()=>{ro.disconnect();cancelAnimationFrame(raf);canvas.removeEventListener('pointermove',onMove);canvas.removeEventListener('pointerdown',onDown);canvas.removeEventListener('pointerup',onUp);canvas.removeEventListener('pointercancel',onUp);canvas.removeEventListener('pointerleave',onLeave);canvas.removeEventListener('keydown',onKey)};
   },[]);
-  return <canvas ref={ref} className="data-globe" role="img" aria-label="Interactive rotating point-cloud globe highlighting Kosovo and New York. Drag to rotate or use arrow keys." tabIndex={0}/>;
+  return <canvas ref={ref} className="data-globe" role="img" aria-label="Interactive rotating point-cloud globe highlighting Kosovo, New York, San Francisco, and five additional U.S. hubs. Drag to rotate or use arrow keys." tabIndex={0}/>;
 }
 
 function Counter({target,prefix='',suffix=''}:{target:number,prefix?:string,suffix?:string}){
@@ -377,7 +386,7 @@ function BatchScoreArt(){
 function UpdateCard({item,index}:{item:UpdateItem;index:number}){
   const trackGlow=(event:ReactPointerEvent<HTMLAnchorElement>)=>{const rect=event.currentTarget.getBoundingClientRect();event.currentTarget.style.setProperty('--update-x',`${((event.clientX-rect.left)/rect.width)*100}%`);event.currentTarget.style.setProperty('--update-y',`${((event.clientY-rect.top)/rect.height)*100}%`)};
   return <a className={`update-card${item.visualTitle?' update-card-map':''}${item.visualMode==='score'?' update-card-score':''}`} href={item.href} onPointerMove={trackGlow} data-reveal>
-    <div className="update-visual">{item.visualMode==='score'?<BatchScoreArt/>:<img src={item.image} alt=""/>}<span className="update-visual-glow" aria-hidden="true"/>{item.visualTitle&&<><div className="coverage-points" aria-hidden="true"><i data-label="SAN FRANCISCO"/><i/><i/><i/><i/><i/></div><div className="update-featured-copy"><span>{item.visualLabel}</span><strong>{item.visualTitle}</strong></div></>}<span className="update-index" aria-hidden="true">0{index+1}</span><i className="update-arrow" aria-hidden="true"><b/></i></div>
+    <div className="update-visual">{item.visualMode==='score'?<BatchScoreArt/>:<img src={item.image} alt=""/>}<span className="update-visual-glow" aria-hidden="true"/>{item.visualTitle&&<div className="update-featured-copy"><span>{item.visualLabel}</span><strong>{item.visualTitle}</strong></div>}<span className="update-index" aria-hidden="true">0{index+1}</span><i className="update-arrow" aria-hidden="true"><b/></i></div>
     <div className="update-meta"><span>{item.category}</span><time dateTime={item.dateTime}>{item.date}</time></div>
     <h3>{item.title}</h3><p>{item.copy}</p>
   </a>;
